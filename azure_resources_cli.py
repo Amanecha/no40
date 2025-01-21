@@ -9,13 +9,13 @@ load_dotenv()
 
 # Azureリソースの認証とクライアント作成
 def get_client():
-    credential = AzureCliCredential()  # Azure CLIでログイン済みのアカウントを使用
-    subscription_id = os.getenv("AZURE_SUBSCRIPTION_ID") # サブスクリプションIDを設定
-    return ResourceManagementClient(credential, subscription_id)
+    credential = AzureCliCredential()  # az loginでログイン済みのアカウントを使用
+    subscription_id = os.getenv("AZURE_SUBSCRIPTION_ID") # load_dotenv()で読み込んだ環境変数にアクセスして取得
+    return ResourceManagementClient(credential, subscription_id) # Azureのリソース管理APIにアクセスするためのクライアント
 
-@click.group()
+# CLIとして複数コマンドをまとめるためのグループ定義
+@click.group() 
 def cli():
-    """Azureリソースを操作するCLIツール"""
     pass
 
 @cli.command()
@@ -34,5 +34,6 @@ def list_resources(resource_group_name):
     for resource in resources:
         click.echo(f"Name: {resource.name}, Type: {resource.type}, Location: {resource.location}")
 
+# スクリプトが直接実行された場合にcli() を呼び出す
 if __name__ == "__main__":
     cli()
