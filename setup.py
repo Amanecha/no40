@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='azure_resources_cli',
+    name='no40',
     version='0.1',
     packages=find_packages(),
     install_requires=[
@@ -12,7 +12,8 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'azure_resources_cli=azure_resources_cli.azure_resources_cli:cli'
+            'no40=no40.cli:cli'
         ]
     },
 )
+
