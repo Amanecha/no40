@@ -34,16 +34,23 @@ def list_resources(resource_group_name):
     for resource in resources:
         click.echo(f"Name: {resource.name}, Type: {resource.type}, Location: {resource.location}")
 
-@cli.command()
+@cli.command(name='crg')
 @click.argument('resource_group_name')
 @click.option('--location', default='japaneast', help='Location of the resource group')
-def create_resource_group(resource_group_name, location):
+@click.option('-v', '--verbose', is_flag=True, help='Show details of the created resource group')
+def create_resource_group(resource_group_name, location, verbose):
     """リソースグループを作成"""
     client = get_client()
     resource_group = client.resource_groups.create_or_update(
         resource_group_name, {'location': location}
     )
     click.echo(f"Resource group {resource_group.name} created in {resource_group.location}")
+    if verbose:
+        details = client.resource_groups.get(resource_group_name)
+        click.echo("Resource Group Details:")
+        click.echo(f"Name: {details.name}")
+        click.echo(f"Location: {details.location}")
+        click.echo(f"Provisioning State: {details.properties.provisioning_state}")
 
 # スクリプトが直接実行された場合にcli() を呼び出す
 if __name__ == "__main__":
