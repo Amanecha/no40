@@ -38,7 +38,8 @@ def list_resources(resource_group_name):
 @click.argument('resource_group_name')
 @click.option('--location', default='japaneast', help='Location of the resource group')
 @click.option('-v', '--verbose', is_flag=True, help='Show details of the created resource group')
-def create_resource_group(resource_group_name, location, verbose):
+@click.option('-dr', '--dry-run', is_flag=True, help='Simulate the creation of the resource group')
+def create_resource_group(resource_group_name, location, verbose, dry_run):
     """リソースグループを作成"""
     client = get_client()
     resource_group = client.resource_groups.create_or_update(
@@ -51,7 +52,14 @@ def create_resource_group(resource_group_name, location, verbose):
         click.echo(f"Name: {details.name}")
         click.echo(f"Location: {details.location}")
         click.echo(f"Provisioning State: {details.properties.provisioning_state}")
-
+    if dry_run:
+        details = client.resource_groups.get(resource_group_name)
+        click.echo(f"Simulating resource group creation:")
+        click.echo(f"Name: {resource_group_name}")
+        click.echo(f"Location: {location}")
+        click.echo(f"tag: {resource_group.tags}")
+        click.echo(f"properties: {resource_group.properties}")
+        return
 # スクリプトが直接実行された場合にcli() を呼び出す
 if __name__ == "__main__":
     cli()
