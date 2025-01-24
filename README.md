@@ -1,3 +1,5 @@
+## Feature
+'no40' will aims to complete resource operations in Azure using the command line. In other words, no40 will provide multiple commands and options to apply resource settings as a cli.
 
 ## Setup
 1. git clone https://github.com/Amanecha/no40.git
