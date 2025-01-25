@@ -14,3 +14,13 @@
 - no40 --help
 - no40 list-resources  
 - no40 list-resources resource-group  
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Dependencies
+This project relies on the following libraries:
+- numpy (BSD License)
+- requests (Apache 2.0 License)
+- PyTorch (BSD License)
+Please refer to the respective licenses of these libraries for more details.
