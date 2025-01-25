@@ -2,7 +2,6 @@
 &nbsp;'no40' will aims to complete resource operations in Azure using the command line. In other words, no40 will provide multiple commands and options to apply resource settings as a cli.
 
 ### usage example
----
 ```no40 crg sampleRG ```  
 >Resource group sampleRG created in japaneast  
 
